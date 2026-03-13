@@ -122,7 +122,7 @@ class FirewallEngine:
             return None
 
         # ✅ Paste your SambaNova API key here as default (optional)
-        SAMBANOVA_API_KEY = api_key or "602ae1d0-1a14-43c6-a03b-3d909fcf3c86"
+        SAMBANOVA_API_KEY = api_key or "YOUR-SAMBANOVA-API-KEY"
         SAMBANOVA_BASE_URL = "https://api.sambanova.ai/v1"
         SAMBANOVA_MODEL = "Meta-Llama-3.1-8B-Instruct"  # fast + free on SambaNova
 
