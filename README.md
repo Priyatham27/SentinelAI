@@ -12,6 +12,17 @@
   <img src="https://img.shields.io/badge/HuggingFace-Transformers-yellow" alt="Transformers">
   <img src="https://img.shields.io/badge/AI-Security-red" alt="Security">
   <img src="https://img.shields.io/badge/License-MIT-purple" alt="License">
+  <a href="https://sentinel-ai-xi-eight.vercel.app/">
+<img src="https://img.shields.io/badge/Frontend-Vercel%20Live-black?style=for-the-badge&logo=vercel" />
+</a>
+
+<a href="https://sentinelai-yw75.onrender.com/docs">
+<img src="https://img.shields.io/badge/Backend-Render%20API-blue?style=for-the-badge&logo=render" />
+</a>
+
+<a href="https://sentinelai-yw75.onrender.com/docs">
+<img src="https://img.shields.io/badge/API-Docs-green?style=for-the-badge&logo=fastapi" />
+</a>
 </p>
 
 ---
@@ -130,7 +141,17 @@ uvicorn backend.main:app --reload
 Open `frontend/index.html` in your favorite browser.
 
 ---
+## 🌐 Live Demo
 
+🖥 **Frontend Dashboard**  
+https://sentinel-ai-xi-eight.vercel.app/
+
+⚙ **Backend API (Swagger Docs)**  
+https://sentinelai-yw75.onrender.com/docs
+
+</p>
+
+---
 ## 🤝 Contributing
 
 Contributions are what make the open-source community such an amazing place to learn, inspire, and create.
