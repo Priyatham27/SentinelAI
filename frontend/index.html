@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SentinelAI — Prompt Injection Firewall</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@700;900&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- HEADER -->
+    <header>
+      <div class="logo-group">
+        <div class="sentinel-icon">
+          <svg width="42" height="46" viewBox="0 0 42 46">
+            <path d="M21 2L2 10v14c0 12 8 22.5 19 26 11-3.5 19-14 19-26V10L21 2z" fill="rgba(0,180,216,0.06)"
+              stroke="#00b4d8" stroke-width="1.2" />
+            <path d="M21 8L7 14v9c0 8 5.5 15 14 17.5 8.5-2.5 14-9.5 14-17.5v-9L21 8z" fill="rgba(0,180,216,0.04)"
+              stroke="rgba(0,180,216,0.3)" stroke-width="0.8" />
+            <path d="M13 23l6 6 10-10" stroke="#06d6a0" stroke-width="2" stroke-linecap="round"
+              stroke-linejoin="round" />
+            <circle cx="21" cy="23" r="3" fill="none" stroke="rgba(0,180,216,0.3)" stroke-width="0.8">
+              <animate attributeName="r" values="3;8;3" dur="2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.3;0;0.3" dur="2s" repeatCount="indefinite" />
+            </circle>
+          </svg>
+        </div>
+        <div class="brand">
+          <div class="brand-name">SENTINEL<span>AI</span></div>
+          <div class="brand-sub">Prompt Injection Firewall for Agentic Systems</div>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="version">v1.2</div>
+        <!-- Theme Toggle -->
+        <div class="theme-btn" onclick="toggleTheme()" id="theme-btn">
+          <span class="theme-icon" id="theme-icon">🌙</span>
+          <div class="theme-track" id="theme-track">
+            <div class="theme-thumb"></div>
+          </div>
+          <span id="theme-label">DARK</span>
+        </div>
+        <div class="live-badge">
+          <div class="dot"></div>FIREWALL ACTIVE
+        </div>
+      </div>
+    </header>
+
+    <!-- ARCHITECTURE FLOW -->
+    <div class="arch-bar" id="arch-bar">
+      <div class="arch-step" id="arch-0">📥 INPUT</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-1">🔍 CONTENT INSPECTION</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-2">⚡ THREAT DETECTION</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-3">🛡 POLICY ENFORCEMENT</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-4">🧹 SANITIZATION</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-5">🤖 AI AGENT</div>
+      <div class="arch-arrow">▶</div>
+      <div class="arch-step" id="arch-6">✅ SECURE OUTPUT</div>
+    </div>
+
+    <!-- SOC SECURITY STATUS PANEL -->
+    <div class="soc-panel" id="soc-panel">
+      <div class="soc-header">
+        <div class="soc-title-group">
+          <div class="soc-pulse-wrap">
+            <div class="soc-pulse" id="soc-pulse"></div>
+          </div>
+          <span class="soc-title">SYSTEM SECURITY STATUS</span>
+        </div>
+        <div class="soc-uptime">UPTIME: <span id="soc-uptime">00:00:00</span></div>
+        <div class="soc-overall" id="soc-overall">
+          <span class="soc-overall-dot" id="soc-overall-dot"></span>
+          <span id="soc-overall-label">ALL SYSTEMS NOMINAL</span>
+        </div>
+      </div>
+
+      <div class="soc-grid">
+        <!-- Row 1: 4 status indicators -->
+        <div class="soc-row">
+          <div class="soc-item" id="si-firewall">
+            <div class="si-icon">🛡</div>
+            <div class="si-info">
+              <div class="si-name">Firewall Status</div>
+              <div class="si-val" id="siv-firewall">ACTIVE</div>
+            </div>
+            <div class="si-led" id="led-firewall"></div>
+          </div>
+          <div class="soc-item" id="si-engine">
+            <div class="si-icon">⚡</div>
+            <div class="si-info">
+              <div class="si-name">Threat Detection Engine</div>
+              <div class="si-val" id="siv-engine">RUNNING</div>
+            </div>
+            <div class="si-led" id="led-engine"></div>
+          </div>
+          <div class="soc-item" id="si-policy">
+            <div class="si-icon">📋</div>
+            <div class="si-info">
+              <div class="si-name">Policy Enforcement</div>
+              <div class="si-val" id="siv-policy">ENABLED</div>
+            </div>
+            <div class="si-led" id="led-policy"></div>
+          </div>
+          <div class="soc-item" id="si-agent">
+            <div class="si-icon">🤖</div>
+            <div class="si-info">
+              <div class="si-name">AI Agent Protection</div>
+              <div class="si-val" id="siv-agent">ACTIVE</div>
+            </div>
+            <div class="si-led" id="led-agent"></div>
+          </div>
+          <div class="soc-item" id="si-ml">
+            <div class="si-icon">🧠</div>
+            <div class="si-info">
+              <div class="si-name">ML Classifier</div>
+              <div class="si-val" id="siv-ml">STANDBY</div>
+            </div>
+            <div class="si-led" id="led-ml"></div>
+          </div>
+          <div class="soc-item" id="si-repair">
+            <div class="si-icon">🔧</div>
+            <div class="si-info">
+              <div class="si-name">Prompt Repair Engine</div>
+              <div class="si-val" id="siv-repair">STANDBY</div>
+            </div>
+            <div class="si-led" id="led-repair"></div>
+          </div>
+        </div>
+
+        <!-- Row 2: Threat metrics -->
+        <div class="soc-metrics">
+          <div class="soc-metric">
+            <div class="sm-val" id="sm-blocked">0</div>
+            <div class="sm-label">Threats Blocked</div>
+          </div>
+          <div class="soc-metric">
+            <div class="sm-val" id="sm-rate">0%</div>
+            <div class="sm-label">Threat Rate</div>
+          </div>
+          <div class="soc-metric">
+            <div class="sm-val safe" id="sm-integrity">100%</div>
+            <div class="sm-label">System Integrity</div>
+          </div>
+          <div class="soc-metric">
+            <div class="sm-val" id="sm-last">—</div>
+            <div class="sm-label">Last Threat</div>
+          </div>
+          <div class="soc-metric">
+            <div class="sm-val" id="sm-critical">0</div>
+            <div class="sm-label">Critical Alerts</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Threat alert banner (hidden by default) -->
+      <div class="soc-alert" id="soc-alert">
+        <span class="soc-alert-icon">⚠</span>
+        <span id="soc-alert-text">THREAT DETECTED — POLICY ENFORCEMENT ACTIVE</span>
+        <span class="soc-alert-close" onclick="dismissAlert()">✕</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat s-total">
+        <div class="stat-n c-accent" id="s-total">0</div>
+        <div class="stat-l">Total Scanned</div>
+      </div>
+      <div class="stat s-blocked">
+        <div class="stat-n c-danger" id="s-blocked">0</div>
+        <div class="stat-l">Threats Blocked</div>
+      </div>
+      <div class="stat s-allowed">
+        <div class="stat-n c-safe" id="s-allowed">0</div>
+        <div class="stat-l">Safe Passed</div>
+      </div>
+      <div class="stat s-critical">
+        <div class="stat-n c-critical" id="s-critical">0</div>
+        <div class="stat-l">Critical Alerts</div>
+      </div>
+      <div class="stat s-rate">
+        <div class="stat-n c-warn" id="s-rate">0%</div>
+        <div class="stat-l">Threat Rate</div>
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div class="main-grid">
+
+      <!-- INPUT PANEL -->
+      <div class="panel">
+        <div class="panel-title">Prompt Input Terminal</div>
+
+        <div class="api-section">
+          <span class="api-label">API KEY</span>
+          <input class="api-input" type="password" id="api-key"
+            placeholder="sk-ant-... (enables LLM hybrid detection)" />
+          <div class="hybrid-toggle" onclick="toggleHybrid()" id="hybrid-toggle">
+            <div class="toggle-dot on" id="toggle-dot"></div>
+            HYBRID
+          </div>
+        </div>
+
+        <!-- Mode tabs -->
+        <div class="mode-tabs">
+          <div class="mode-tab active" id="tab-firewall" onclick="setMode('firewall')">🛡 FIREWALL</div>
+          <div class="mode-tab" id="tab-agent" onclick="setMode('agent')">🤖 AGENT SIM</div>
+        </div>
+
+        <textarea class="prompt-area" id="prompt-input"
+          placeholder="Enter a prompt to scan...&#10;&#10;Ctrl+Enter to analyze"></textarea>
+
+        <div class="samples-section">
+          <div class="s-label">// ATTACK SIMULATIONS</div>
+          <div class="chips">
+            <div class="chip atk" onclick="load('override')">⚔ Instruction Override</div>
+            <div class="chip atk" onclick="load('exfil')">💀 Data Exfiltration</div>
+            <div class="chip atk" onclick="load('tool')">🔧 Tool Misuse</div>
+            <div class="chip atk" onclick="load('jailbreak')">🔓 Jailbreak</div>
+          </div>
+          <div class="s-label">// SAFE PROMPTS</div>
+          <div class="chips">
+            <div class="chip safe" onclick="load('safe1')">✓ Document Query</div>
+            <div class="chip safe" onclick="load('safe2')">✓ Technical Question</div>
+          </div>
+        </div>
+
+        <button class="detect-btn" id="detect-btn" onclick="analyze()">⟶ ANALYZE PROMPT</button>
+
+        <div class="sanitized-box" id="sanitized-box">
+          <div class="san-label">// SANITIZED OUTPUT (safe to forward)</div>
+          <div class="san-text" id="sanitized-text"></div>
+        </div>
+
+        <!-- ML Classifier Probability Bars -->
+        <div class="sanitized-box" id="ml-section"
+          style="display:none;border-color:rgba(255,209,102,0.2);background:rgba(255,209,102,0.04);">
+        </div>
+
+        <!-- Prompt Repair Engine -->
+        <div class="repair-box" id="repair-box" style="display:none;">
+          <div class="repair-label">// 🔧 PROMPT RECOVERY ENGINE — SAFE ALTERNATIVE</div>
+          <div class="repair-explanation" id="repair-explanation"></div>
+          <div class="repair-suggestion" id="repair-suggestion"></div>
+          <button class="repair-use-btn" onclick="useRepairedPrompt()">↩ USE THIS PROMPT</button>
+        </div>
+      </div>
+
+      <!-- RESULT PANEL -->
+      <div class="panel">
+        <div class="panel-title">Threat Analysis Result</div>
+        <div class="result-box" id="result-box">
+
+          <div class="idle-msg" id="idle-state">
+            <span class="idle-icon">⬡</span>
+            AWAITING PROMPT SUBMISSION
+          </div>
+
+          <div class="scan-anim" id="scan-state">
+            <div class="scan-rings">
+              <div class="ring"></div>
+              <div class="ring"></div>
+              <div class="ring"></div>
+            </div>
+            <div class="scan-steps">
+              <div class="scan-step" id="ss-0">CONTENT INSPECTION</div>
+              <div class="scan-step" id="ss-1">RULE-BASED DETECTION</div>
+              <div class="scan-step" id="ss-2">LLM SEMANTIC ANALYSIS</div>
+              <div class="scan-step" id="ss-3">POLICY ENFORCEMENT</div>
+              <div class="scan-step" id="ss-4">GENERATING REPORT</div>
+            </div>
+          </div>
+
+          <div class="result-content" id="result-content">
+            <div class="verdict" id="verdict"></div>
+            <div class="r-rows" id="r-rows"></div>
+            <div class="conf-wrap">
+              <div class="conf-head">
+                <span>CONFIDENCE SCORE</span>
+                <span id="conf-pct">—</span>
+              </div>
+              <div class="conf-track">
+                <div class="conf-fill" id="conf-fill"></div>
+              </div>
+            </div>
+            <div class="method-badge" id="method-badge"></div>
+          </div>
+        </div>
+
+        <!-- Agent response box (shown in agent mode) -->
+        <div class="agent-box" id="agent-box">
+          <div class="san-label">// AI AGENT RESPONSE</div>
+          <div class="agent-text" id="agent-text"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIPELINE MODULES -->
+    <div class="pipeline-panel">
+      <div class="panel-title" style="margin-bottom:14px">Security Pipeline Modules</div>
+      <div class="pipe-grid">
+        <div class="pipe-module" id="pm-0">
+          <span class="pm-icon">🔍</span>
+          <div class="pm-name">CONTENT<br />INSPECTION</div>
+          <div class="pm-status s-idle" id="pms-0">STANDBY</div>
+        </div>
+        <div class="pipe-module" id="pm-1">
+          <span class="pm-icon">⚡</span>
+          <div class="pm-name">THREAT<br />DETECTION ENGINE</div>
+          <div class="pm-status s-idle" id="pms-1">STANDBY</div>
+        </div>
+        <div class="pipe-module" id="pm-2">
+          <span class="pm-icon">🛡</span>
+          <div class="pm-name">POLICY<br />ENFORCEMENT</div>
+          <div class="pm-status s-idle" id="pms-2">STANDBY</div>
+        </div>
+        <div class="pipe-module" id="pm-3">
+          <span class="pm-icon">🧹</span>
+          <div class="pm-name">PROMPT<br />SANITIZATION</div>
+          <div class="pm-status s-idle" id="pms-3">STANDBY</div>
+        </div>
+        <div class="pipe-module" id="pm-4">
+          <span class="pm-icon">📋</span>
+          <div class="pm-name">AUDIT<br />LOGGING</div>
+          <div class="pm-status s-idle" id="pms-4">STANDBY</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AUDIT LOG -->
+    <div class="log-panel">
+      <div class="log-header">
+        <div class="panel-title" style="margin:0;">Security Audit Log</div>
+        <div class="log-meta">
+          <span class="log-cnt" id="log-cnt">0 EVENTS LOGGED</span>
+          <button class="clear-btn" onclick="clearAll()">CLEAR LOGS</button>
+        </div>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>TIMESTAMP</th>
+              <th>PROMPT PREVIEW</th>
+              <th>ATTACK TYPE</th>
+              <th>RISK LEVEL</th>
+              <th>ACTION</th>
+              <th>CONFIDENCE</th>
+              <th>DETECTION METHOD</th>
+            </tr>
+          </thead>
+          <tbody id="log-body">
+            <tr class="empty-row">
+              <td colspan="7">// NO SECURITY EVENTS LOGGED YET</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div><!-- /wrap -->
+  <script src="script.js"></script>
+</body>
+
+</html>

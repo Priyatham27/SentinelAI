@@ -1,0 +1,55 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# Environment variables
+.env
+.env.*
+
+# Logs
+*.log
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# Model training artifacts
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.joblib
+*.pkl
+
+# Large ML model folders (if you don't want to push them)
+models/sentinelai_prompt_model/
+
+# Dataset files
+*.csv
+*.tsv
+*.jsonl
+
+# Node modules (if frontend uses npm later)
+node_modules/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Colab files
+*.ipynb~
